@@ -1,0 +1,25 @@
+name: Compile COBOL
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install GnuCOBOL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y open-cobol
+
+      - name: Compile COBOL Program
+        run: cobc -x hello.cob -o hello.out
+
+      - name: Run Program
+        run: ./hello.out
