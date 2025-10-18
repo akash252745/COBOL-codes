@@ -1,4 +1,4 @@
-name: Compile COBOL
+name: Compile COBOL Program
 
 on:
   push:
@@ -10,15 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install GnuCOBOL
         run: |
           sudo apt-get update
-          sudo apt-get install -y open-cobol
+          sudo apt-get install -y gnucobol
 
-      - name: Compile COBOL Program
+      - name: Verify COBOL version
+        run: cobc -v
+        
+      - name: Compile COBOL 
         run: cobc -x hello.cob -o hello.out
 
       - name: Run Program
