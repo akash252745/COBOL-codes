@@ -1,0 +1,28 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. MULT5.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 WS-NUM        PIC 9(03) VALUE ZERO.
+       01 WS-EDIT       PIC ZZZ.
+       01 I             PIC 9 VALUE 1.
+
+       PROCEDURE DIVISION.
+
+       000-MAIN.
+           PERFORM VARYING WS-NUM FROM 5 BY 5 UNTIL WS-NUM > 100
+
+               MOVE WS-NUM TO WS-EDIT
+
+               *> Find first non-space character
+               PERFORM VARYING I FROM 1 BY 1 UNTIL I > 3
+                   IF WS-EDIT(I:1) NOT = SPACE
+                       EXIT PERFORM
+                   END-IF
+               END-PERFORM
+
+               DISPLAY WS-EDIT(I:)
+
+           END-PERFORM
+
+           STOP RUN.
